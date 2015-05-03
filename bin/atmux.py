@@ -11,6 +11,12 @@ parser.add_argument('-S', dest='socket_path')
 parser.add_argument('session', nargs='?')
 args = parser.parse_args()
 
+# TODO HACK
+path_parts = os.environ['PATH'].split(':')
+if '/usr/local/bin' not in path_parts:
+    path_parts.append('/usr/local/bin')
+    os.environ['PATH'] = ':'.join(path_parts)
+
 tmux_sessiondir = os.path.expanduser('~/.tmux-sessions')
 
 if os.environ.get('COLORTERM') == 'gnome-terminal':
